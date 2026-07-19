@@ -1,0 +1,70 @@
+==============================
+MetricMind Sample Business Queries
+==============================
+
+SALES ANALYSIS
+--------------
+1. What is the total sales?
+2. What are the monthly sales?
+3. Which region has the highest sales?
+4. Which state generated the highest revenue?
+5. Which city has the highest sales?
+6. What are the yearly sales trends?
+
+PROFIT ANALYSIS
+---------------
+7. What is the total profit?
+8. Which category generated the highest profit?
+9. Which sub-category has the lowest profit?
+10. Which products are making losses?
+11. Which region has the highest profit margin?
+
+CUSTOMER ANALYSIS
+-----------------
+12. Who are the top 10 customers by sales?
+13. Which customer generated the highest profit?
+14. Which customer segment has the highest sales?
+15. How many unique customers are there?
+
+PRODUCT ANALYSIS
+----------------
+16. What are the top 10 best-selling products?
+17. Which category has the highest sales?
+18. Which sub-category sells the most?
+19. Which products have the highest discount?
+20. Which products are most profitable?
+
+REGIONAL ANALYSIS
+-----------------
+21. Compare sales across regions.
+22. Compare profit across states.
+23. Which region has the highest average order value?
+24. Which cities have the highest profits?
+
+ORDER ANALYSIS
+--------------
+25. How many orders were placed?
+26. What is the average order value?
+27. Which shipping mode is used the most?
+28. Which shipping mode generates the highest profit?
+
+DISCOUNT ANALYSIS
+-----------------
+29. How does discount affect profit?
+30. Which products receive the highest discounts?
+
+DASHBOARD QUESTIONS
+-------------------
+31. Show overall business performance.
+32. Show today's KPI summary.
+33. Show sales, profit, and quantity by category.
+34. Show sales trend over time.
+35. Show top-performing products and customers.
+
+AI AGENT QUERIES
+----------------
+36. Why did profit decrease in the South region?
+37. Explain the sales trend for 2017.
+38. Recommend products to improve profit.
+39. Which business area needs attention?
+40. Summarize this business in one paragraph.
