@@ -1,5 +1,9 @@
 import pandas as pd
-df=pd.read_csv(".../datasets/raw/global_superstore.csv")
+from pathlib import Path
+BASE_DIR= Path(__file__).resolve().parents[2]
+DATASET_PATH= BASE_DIR/"datasets"/"raw"/"global_superstore.csv"
+
+df=pd.read_csv(DATASET_PATH)
 
 def get_total_sales():
     return round(df["Sales"].sum(),2)
