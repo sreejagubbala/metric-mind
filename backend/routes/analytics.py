@@ -1,29 +1,38 @@
 from fastapi import APIRouter
-from services.data_service import *
-router=APIRouter()
+from backend.services.data_service import (
+    get_total_sales,
+    get_total_profit,
+    get_total_orders,
+    get_regions,
+    get_categories
+)
+router = APIRouter(
+    prefix="/analytics",
+    tags=["Analytics"]
+)
 
 @router.get("/sales")
 def sales():
-    return{
-        "Total Sales":get_total_sales()
+    return {
+        "total_sales": get_total_sales()
     }
 @router.get("/profit")
 def profit():
-    return{
-        "Total Profit":get_total_profit()
+    return {
+        "total_profit": get_total_profit()
     }
 @router.get("/orders")
 def orders():
-    return{
-        "Total Orders":get_total_orders()
+    return {
+        "total_orders": get_total_orders()
     }
 @router.get("/regions")
 def regions():
-    return{
-        "Regions":get_regions()
+    return {
+        "regions": get_regions()
     }
 @router.get("/categories")
 def categories():
-    return{
-        "Categories":get_categories()
+    return {
+        "categories": get_categories()
     }

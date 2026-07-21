@@ -1,9 +1,12 @@
 from fastapi import APIRouter
-router = APIRouter()
-@router.get("/health")
+router = APIRouter(
+    prefix="/health",
+    tags=["Health"]
+)
+@router.get("/")
 def health():
-    return{
-        "status":"Running",
+    return {
+        "status": "running",
         "backend": "FastAPI",
-        "project": "Metric Mind"
+        "project": "MetricMind"
     }
