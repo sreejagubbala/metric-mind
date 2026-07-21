@@ -1,6 +1,12 @@
 from fastapi import APIRouter
-from services.data_service import dataset_summary
-router = APIRouter()
-@router.get("/summary")
+from backend.services.data_service import (
+    get_dataset_summary
+)
+router = APIRouter(
+    prefix="/summary",
+    tags=["Summary"]
+)
+
+@router.get("/")
 def summary():
-    return dataset_summary()
+    return get_dataset_summary()
