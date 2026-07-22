@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_superstore
+    description: "Clean staging model for Superstore dataset."
+
+    columns:
+      - name: row_id
+        description: "Unique row identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+
+      - name: product_id
+        tests:
+          - not_null
+
+      - name: sales
+        tests:
+          - not_null
+
+  - name: fact_sales
+    description: "Fact table containing sales transactions."
+
+  - name: dim_customer
+    description: "Customer dimension."
+
+  - name: dim_product
+    description: "Product dimension."
+
+  - name: dim_region
+    description: "Region dimension."
