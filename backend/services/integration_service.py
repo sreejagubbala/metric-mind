@@ -1,4 +1,4 @@
-from backend.services.data_service import (
+from services.data_service import (
     get_dataset_summary
 )
 
