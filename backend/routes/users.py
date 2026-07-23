@@ -3,8 +3,8 @@ from fastapi import (
     Depends,
     HTTPException
 )
-from backend.models.api_models import UserCreate
-from backend.auth import get_current_user
+from models.api_models import UserCreate
+from auth import get_current_user
 
 router = APIRouter(
     prefix="/users",

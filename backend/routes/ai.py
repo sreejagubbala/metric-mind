@@ -3,9 +3,9 @@ from fastapi import (
     Depends,
     HTTPException
 )
-from backend.models.api_models import AIQueryRequest
-from backend.auth import get_current_user
-from backend.services.ai_service import (
+from models.api_models import AIQueryRequest
+from auth import get_current_user
+from services.ai_service import (
     ask_ai_agent
 )
 

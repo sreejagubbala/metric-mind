@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from backend.services.integration_service import (
+from services.integration_service import (
     get_backend_status,
     get_integration_status,
     get_data_summary

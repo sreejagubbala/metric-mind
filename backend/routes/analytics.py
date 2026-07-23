@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from backend.services.data_service import (
+from services.data_service import (
     get_total_sales,
     get_total_profit,
     get_total_orders,
