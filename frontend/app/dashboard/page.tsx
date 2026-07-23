@@ -1,3 +1,4 @@
+import SalesChart from "../../components/SalesChart";
 import DashboardLayout from "../../components/DashboardLayout";
 import MetricCard from "../../components/MetricCard";
 
@@ -23,6 +24,7 @@ export default function Dashboard() {
         <MetricCard title="Profit" value="₹4.2M" />
         <MetricCard title="Orders" value="21,560" />
         <MetricCard title="Margin" value="35%" />
+        <SalesChart />
       </div>
     </DashboardLayout>
   );
