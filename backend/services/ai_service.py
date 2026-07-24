@@ -1,7 +1,9 @@
 import os
 import httpx
+from services.logging_service import logger
 AI_AGENT_URL = os.getenv("AI_AGENT_URL","http://localhost:8001")
 async def ask_ai_agent(query: str):
+    logger.info("AI query received")
     payload = {
         "query": query
     }
@@ -20,3 +22,6 @@ async def ask_ai_agent(query: str):
             "success": False,
             "error": str(error)
         }
+    except Exception as error:
+        logger.error(f"AI Agent error: {error}")
+        raise
