@@ -1,0 +1,75 @@
+cubes:
+  - name: sales
+    sql_table: public.sales
+    
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: region
+        sql: region
+        type: string
+
+      - name: category
+        sql: category
+        type: string
+
+      - name: order_date
+        sql: order_date
+        type: time
+
+      - name: customer_name
+        sql: customer_name
+        type: string
+    measures:
+      - name: revenue
+        sql: amount
+        type: sum
+        description: "Total sales revenue"
+
+      - name: cost
+        sql: cost
+        type: sum
+        description: "Total cost of goods sold"
+
+      - name: profit
+        sql: "{revenue} - {cost}"
+        type: number
+        description: "Revenue minus cost (absolute profit)"
+
+      - name: profit_margin_pct
+        sql: "({revenue} - {cost}) / NULLIF({revenue}, 0) * 100"
+        type: number
+        description: "Profit as a percentage of revenue"
+
+      - name: europe_revenue
+        sql: "SUM(CASE WHEN region = 'Europe' THEN amount ELSE 0 END)"
+        type: number
+        description: "Revenue generated from Europe only"
+
+      - name: north_america_revenue
+        sql: "SUM(CASE WHEN region = 'North America' THEN amount ELSE 0 END)"
+        type: number
+        description: "Revenue generated from North America only"
+
+      - name: asia_revenue
+        sql: "SUM(CASE WHEN region = 'Asia' THEN amount ELSE 0 END)"
+        type: number
+        description: "Revenue generated from Asia only"
+
+      - name: hardware_revenue
+        sql: "SUM(CASE WHEN category = 'Hardware' THEN amount ELSE 0 END)"
+        type: number
+        description: "Revenue generated from Hardware products only"
+
+      - name: software_revenue
+        sql: "SUM(CASE WHEN category = 'Software' THEN amount ELSE 0 END)"
+        type: number
+        description: "Revenue generated from Software products only"
+        
+      - name: customer_count
+        sql: "COUNT(DISTINCT customer_name)"
+        type: number
+        description: "Number of unique customers"
