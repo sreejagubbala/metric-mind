@@ -23,6 +23,7 @@ cubes:
       - name: customer_name
         sql: customer_name
         type: string
+        
     measures:
       - name: revenue
         sql: amount
@@ -73,3 +74,4 @@ cubes:
         sql: "COUNT(DISTINCT customer_name)"
         type: number
         description: "Number of unique customers"
+        
