@@ -1,8 +1,8 @@
 SELECT
     row_id,
     order_id,
-    order_date,
-    ship_date,
+    TO_DATE(order_date, 'MM/DD/YYYY') AS order_date,
+    TO_DATE(ship_date, 'MM/DD/YYYY') AS ship_date,
     ship_mode,
     customer_id,
     customer_name,
