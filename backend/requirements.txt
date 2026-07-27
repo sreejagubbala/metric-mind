@@ -1,8 +1,12 @@
 fastapi
-uvicorn
+uvicorn[standard]
 pandas
+sqlalchemy
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
 httpx
+pydantic
+pydantic-settings
+python-dotenv
 pytest
