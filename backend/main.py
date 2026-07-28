@@ -1,26 +1,92 @@
 from fastapi import FastAPI
-from config import APP_NAME, VERSION, DESCRIPTION
-from routes.health import router as health_router
-from routes.analytics import router as analytics_router
-from routes.summary import router as summary_router
-from routes.auth import router as auth_router
-from routes.integration import router as integration_router
+from fastapi.middleware.cors import CORSMiddleware
+
+from backend.database import Base
+from backend.database import engine
+from backend.models import user
+from backend.config import (
+    PROJECT_NAME,
+    VERSION
+)
+from backend.routes import (
+    health,
+    analytics,
+    auth,
+    users,
+    integration,
+    query,
+    
+)
+from backend.routes import summary
+
+Base.metadata.create_all(
+    bind=engine
+)
 
 app = FastAPI(
-    title=APP_NAME,
+    title=PROJECT_NAME,
     version=VERSION,
-    description=DESCRIPTION
+    description=(
+        "MetricMind "
+        "Agentic Semantic BI Engine"
+    )
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+app.include_router(
+    health.router,
+    tags=["Health"]
+)
+
+app.include_router(
+    analytics.router,
+    prefix="/analytics",
+    tags=["Analytics"]
+)
+
+app.include_router(
+    auth.router,
+    prefix="/auth",
+    tags=["Authentication"]
+)
+
+app.include_router(
+    summary.router,
+    prefix="/summary",
+    tags=["summary"]
+)
+
+app.include_router(
+    users.router,
+    prefix="/users",
+    tags=["Users"]
+)
+
+app.include_router(
+    integration.router,
+    prefix="/integration",
+    tags=["Integration"]
+)
+
+app.include_router(
+    query.router,
+    prefix="/query",
+    tags=["Query"]
 )
 
 @app.get("/")
 def home():
     return {
-        "Project": "MetricMind",
-        "Message": "Backend Running Successfully"
+        "project":"MetricMind",
+        "message": "Backend Running Successfully",
+        "version": VERSION
     }
-
-app.include_router(health_router)
-app.include_router(analytics_router)
-app.include_router(summary_router)
-app.include_router(auth_router)
-app.include_router(integration_router)
