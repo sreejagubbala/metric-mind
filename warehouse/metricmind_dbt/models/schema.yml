@@ -71,3 +71,31 @@ models:
 
   - name: dim_region
     description: "Region dimension."
+
+    columns:
+    - name: region
+      description: "Region name."
+
+      tests:
+        - not_null
+
+  - name: monthly_sales
+    description: "Monthly sales and profit summary."
+
+  - name: regional_sales
+    description: "Sales and profit summary by region."
+
+  - name: category_sales
+    description: "Sales performance by product category."
+
+  - name: top_products
+    description: "Top 10 products based on total sales."
+
+  - name: top_customers
+    description: "Top 10 customers based on total sales."
+
+  - name: sales_trend
+    description: "Monthly sales trend analysis."
+
+  - name: customer_segment_analysis
+    description: "Sales analysis by customer segment."
