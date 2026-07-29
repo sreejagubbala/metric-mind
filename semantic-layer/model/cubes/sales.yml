@@ -74,4 +74,3 @@ cubes:
         sql: "COUNT(DISTINCT customer_name)"
         type: number
         description: "Number of unique customers"
-        
