@@ -1,91 +1,111 @@
 from pathlib import Path
 import pandas as pd
-BASE_DIR = (Path(__file__).resolve().parents[2])
-DATASET_PATH = (BASE_DIR/ "datasets"/ "raw"/ "global_superstore.csv")
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+DATASET_PATH = (
+    BASE_DIR
+    / "datasets"
+    / "raw"
+    / "global_superstore.csv"
+)
 
 def load_data():
     if not DATASET_PATH.exists():
         raise FileNotFoundError(
-            f"Dataset not found at: "
-            f"{DATASET_PATH}"
+            f"Dataset not found at: {DATASET_PATH}"
         )
-    return pd.read_csv(
-        DATASET_PATH
-    )
-def get_total_sales():
+    return pd.read_csv(DATASET_PATH)
+
+def get_sales_data():
     df = load_data()
-    return round(
-        float(
-             df["Sales"].sum()
-        ),
-        2
-    )
-def get_total_profit():
+    columns = [
+        column
+        for column in [
+            "Order Date",
+            "Sales",
+            "Region",
+            "Category",
+            "Country"
+        ]
+        if column in df.columns
+    ]
+    return df[columns]
+
+def get_profit_data():
     df = load_data()
-    return round(
-        float(
-            df["Profit"].sum()
-        ),
-        2
-    )
-def get_total_orders():
+    columns = [
+        column
+        for column in [
+            "Order Date",
+            "Profit",
+            "Region",
+            "Category"
+        ]
+        if column in df.columns
+    ]
+    return df[columns]
+
+def get_order_data():
     df = load_data()
-    if "Order ID" in df.columns:
-        return int(
-            df["Order ID"].nunique()
+    columns = [
+        column
+        for column in [
+            "Order ID",
+            "Order Date",
+            "Sales",
+            "Profit",
+            "Region",
+            "Category"
+        ]
+        if column in df.columns
+    ]
+    return df[columns]
+
+def get_region_summary():
+    df = load_data()
+    if "Region" not in df.columns:
+        return []
+    result = (
+        df.groupby("Region")
+        .agg(
+            sales=("Sales", "sum"),
+            profit=("Profit", "sum")
         )
-    return len(df)
-def get_regions():
-    df = load_data()
-    return (
-        df["Region"]
-        .dropna()
-        .unique()
-        .tolist()
+        .reset_index()
     )
-def get_categories():
-    df = load_data()
-    return (
-        df["Category"]
-        .dropna()
-        .unique()
-        .tolist()
+    return result.to_dict(
+        orient="records"
     )
-def get_dataset_summary():
+
+def get_category_summary():
+    df = load_data()
+    if "Category" not in df.columns:
+        return []
+    result = (
+        df.groupby("Category")
+        .agg(
+            sales=("Sales", "sum"),
+            profit=("Profit", "sum")
+        )
+        .reset_index()
+    )
+    return result.to_dict(
+        orient="records"
+    )
+
+def get_sales_summary():
     df = load_data()
     return {
-        "rows": len(df),
-        "columns": list(df.columns),
-        "total_sales": round(
-            float(
-                df["Sales"].sum()
-            ),
-            2
-        ),
-        "total_profit": round(
-            float(
-                df["Profit"].sum()
-            ),
-            2
-        ),
-        "total_orders": (
-            int(
-                df["Order ID"].nunique()
-            )
-            if "Order ID"
-            in df.columns
-            else len(df)
-        ),
-        "regions": (
-            df["Region"]
-            .dropna()
-            .unique()
-            .tolist()
-        ),
-        "categories": (
-            df["Category"]
-            .dropna()
-            .unique()
-            .tolist()
-        )
+        "total_sales": float(df["Sales"].sum()),
+        "average_sales": float(df["Sales"].mean()),
+        "records": len(df)
+    }
+
+def get_profit_summary():
+    df = load_data()
+    return {
+        "total_profit": float(df["Profit"].sum()),
+        "average_profit": float(df["Profit"].mean()),
+        "records": len(df)
     }

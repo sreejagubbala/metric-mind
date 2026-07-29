@@ -1,36 +1,41 @@
-from fastapi import (
-    APIRouter,
-    Depends,
-    HTTPException
-)
-from models.api_models import AIQueryRequest
-from auth import get_current_user
-from services.ai_service import (
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+
+from backend.models.user import User
+from backend.schemas.query import QueryRequest
+from backend.services.ai_service import (
     ask_ai_agent
 )
-
-router = APIRouter(
-    prefix="/ai",
-    tags=["AI Agent"]
+from backend.utils.auth import (
+    get_current_user
 )
 
-@router.post("/query")
-async def ai_query(
-   request: AIQueryRequest,
-    current_user: dict = Depends(
+router = APIRouter()
+
+@router.post("/ask")
+async def ask_ai(
+    request: QueryRequest,
+    current_user: User = Depends(
         get_current_user
     )
 ):
-    if not request.query.strip():
-        raise HTTPException(
-            status_code=400,
-            detail="Query cannot be empty"
+    try:
+        result = await ask_ai_agent(
+            request.question
         )
-    result = await ask_ai_agent(
-        request.query
-    )
-    return {
-        "user_id": current_user["user_id"],
-        "query": request.query,
-        "result": result
-    }
+        return {
+            "status": "success",
+            "question":
+                request.question,
+            "result":
+                result
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                f"AI Agent error: "
+                f"{str(e)}"
+            )
+        )
