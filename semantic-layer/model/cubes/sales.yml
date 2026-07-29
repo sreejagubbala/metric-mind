@@ -1,17 +1,17 @@
 cubes:
   - name: sales
     sql_table: public.sales
-    
     dimensions:
+
       - name: id
         sql: id
         type: number
-        primary_key: true
 
+        primary_key: true
       - name: region
         sql: region
         type: string
-
+        
       - name: category
         sql: category
         type: string
@@ -69,10 +69,3 @@ cubes:
         sql: "SUM(CASE WHEN category = 'Software' THEN amount ELSE 0 END)"
         type: number
         description: "Revenue generated from Software products only"
-        
-      - name: customer_count
-        sql: "COUNT(DISTINCT customer_name)"
-        type: number
-        description: "Number of unique customers"
-        
-        
