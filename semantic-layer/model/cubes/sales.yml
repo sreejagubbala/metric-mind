@@ -69,9 +69,3 @@ cubes:
         sql: "SUM(CASE WHEN category = 'Software' THEN amount ELSE 0 END)"
         type: number
         description: "Revenue generated from Software products only"
-        
-      - name: customer_count
-        sql: "COUNT(DISTINCT customer_name)"
-        type: number
-        description: "Number of unique customers"
-        
