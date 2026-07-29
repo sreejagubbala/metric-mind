@@ -1,29 +1,39 @@
-import Navbar from "../../components/Navbar";
+import ChatHeader from "../../components/ChatHeader";
+import ChatHistory from "../../components/ChatHistory";
 import ChatBox from "../../components/ChatBox";
+import ChatInput from "../../components/ChatInput";
 
 export default function ChatPage() {
   return (
-    <>
-      <Navbar />
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+      }}
+    >
+      <ChatHistory />
 
       <div
         style={{
-          padding: "40px",
-          maxWidth: "1200px",
-          margin: "auto",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <h1
+        <ChatHeader />
+
+        <div
           style={{
-            fontSize: "40px",
-            marginBottom: "30px",
+            flex: 1,
+            overflowY: "auto",
+            padding: "20px",
           }}
         >
-          AI Business Assistant
-        </h1>
+          <ChatBox />
+        </div>
 
-        <ChatBox />
+        <ChatInput />
       </div>
-    </>
+    </div>
   );
 }
