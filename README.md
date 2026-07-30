@@ -289,3 +289,83 @@ These models calculate important business performance metrics.
 - Customer Segment Analysis
 
 These analytics models provide insights into business performance from different perspectives.
+---
+
+# 🧠 AI & Semantic Layer
+
+MetricMind leverages Artificial Intelligence to simplify business analytics.
+
+Instead of writing SQL queries, users can ask questions in natural language such as:
+
+- What is the total revenue this month?
+- Which region has the highest sales?
+- Show the top 10 customers.
+- Compare category-wise sales.
+
+The AI layer interprets the user's intent, translates it into business logic, retrieves the required data, and presents meaningful insights through the frontend dashboard.
+---
+
+# 🔄 Project Workflow
+
+The overall workflow of MetricMind is as follows:
+
+1. Raw business data is imported into PostgreSQL.
+2. dbt transforms and validates the data.
+3. Fact and Dimension models are created.
+4. Business Metric models calculate KPIs.
+5. Analytics models generate reports.
+6. The FastAPI backend serves processed data.
+7. The Semantic Layer interprets natural language queries.
+8. The Next.js frontend displays business insights to users.
+---
+
+# 👥 Team Members
+
+| Name | Role |
+|------|------|
+| Sreeja | Team Lead & Data Warehouse Developer |
+| Venkat | Backend Developer |
+| Ishita | Frontend Developer |
+| Vijay | Semantic Layer Developer |
+| Mehatab | AI Integration & Testing |
+---
+
+# 🚀 Future Enhancements
+
+- Real-time data ingestion
+- Interactive Power BI dashboards
+- Cloud deployment (AWS/Azure)
+- Predictive analytics using Machine Learning
+- Automated report generation
+- Role-based authentication
+- Conversational AI assistant
+---
+
+# 📚 Learning Outcomes
+
+During the development of MetricMind, the team gained hands-on experience in:
+
+- PostgreSQL Database Management
+- SQL Query Development
+- Data Warehousing Concepts
+- dbt Model Development
+- Data Quality Testing
+- Business Intelligence
+- FastAPI Backend Development
+- Next.js Frontend Development
+- Git & GitHub Collaboration
+- AI-powered Business Analytics
+---
+
+# 🙏 Acknowledgement
+
+This project was developed as part of the **Axlero Learning | IntelleQ Academy Internship Program**.
+
+We sincerely thank our mentors, instructors, and team members for their continuous guidance and support throughout the project. The internship provided valuable practical experience in Data Engineering, Artificial Intelligence, Business Intelligence, and Full-Stack Development.
+---
+
+# 📄 License
+
+This project was developed for educational and internship purposes.
+
+© 2026 MetricMind Team. All Rights Reserved.
