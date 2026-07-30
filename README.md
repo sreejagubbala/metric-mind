@@ -29,4 +29,94 @@ Instead of writing SQL queries, users can simply ask questions in plain English 
 - 🔍 Semantic Query Processing
 - ✅ Automated Data Quality Testing
 - 📚 Auto-generated Documentation
+---
 
+# 🏗️ System Architecture
+
+```text
+                    +----------------------+
+                    |        User          |
+                    +----------+-----------+
+                               |
+                               v
+                  Natural Language Query
+                               |
+                               v
+                    +----------------------+
+                    |  AI / LLM Processing |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    |   Semantic Layer     |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    |   FastAPI Backend    |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | PostgreSQL Database  |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    |    dbt Warehouse     |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Analytics & Metrics  |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Next.js Dashboard    |
+                    +----------------------+
+```
+---
+
+# 📂 Repository Structure
+
+```text
+metric-mind/
+│
+├── backend/                  # FastAPI backend services
+├── frontend/                 # Next.js frontend application
+├── semantic-layer/           # Semantic query processing
+├── warehouse/
+│   └── metricmind_dbt/
+│       ├── analyses/
+│       ├── macros/
+│       ├── models/
+│       │   ├── staging/
+│       │   ├── marts/
+│       │   │   ├── analytics/
+│       │   │   ├── facts/
+│       │   │   ├── metrics/
+│       │   │   └── dimensions/
+│       ├── seeds/
+│       ├── snapshots/
+│       ├── tests/
+│       └── schema.yml
+│
+├── datasets/
+├── docs/
+├── README.md
+└── LICENSE
+```
+---
+
+# 🛠️ Technology Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Programming Language | Python, SQL |
+| Frontend | Next.js, React, Tailwind CSS |
+| Backend | FastAPI |
+| Database | PostgreSQL |
+| Data Transformation | dbt (Data Build Tool) |
+| AI | Groq API, Llama Models |
+| Version Control | Git, GitHub |
