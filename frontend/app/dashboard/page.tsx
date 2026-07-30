@@ -1,31 +1,33 @@
-import SalesChart from "../../components/SalesChart";
 import DashboardLayout from "../../components/DashboardLayout";
-import MetricCard from "../../components/MetricCard";
+import DashboardHeader from "../../components/DashboardHeader";
+import KPIGrid from "../../components/KPIGrid";
+import RevenueChart from "../../components/RevenueChart";
+import SalesByRegion from "../../components/SalesByRegion";
+import RecentActivity from "../../components/RecentActivity";
 
 export default function Dashboard() {
   return (
     <DashboardLayout>
-      <h1
-        style={{
-          marginBottom: "30px",
-        }}
-      >
-        Business Overview
-      </h1>
+
+      <DashboardHeader />
+
+      <KPIGrid />
+
+      <RevenueChart />
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4,1fr)",
+          gridTemplateColumns: "1fr 1fr",
           gap: "20px",
+          marginTop: "30px",
         }}
       >
-        <MetricCard title="Revenue" value="₹12.5M" />
-        <MetricCard title="Profit" value="₹4.2M" />
-        <MetricCard title="Orders" value="21,560" />
-        <MetricCard title="Margin" value="35%" />
-        <SalesChart />
+        <SalesByRegion />
+
+        <RecentActivity />
       </div>
+
     </DashboardLayout>
   );
 }
