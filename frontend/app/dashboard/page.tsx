@@ -4,6 +4,7 @@ import KPIGrid from "../../components/KPIGrid";
 import RevenueChart from "../../components/RevenueChart";
 import SalesByRegion from "../../components/SalesByRegion";
 import RecentActivity from "../../components/RecentActivity";
+import NotificationPanel from "../../components/NotificationPanel";
 
 export default function Dashboard() {
   return (
@@ -31,3 +32,5 @@ export default function Dashboard() {
     </DashboardLayout>
   );
 }
+<NotificationPanel />
+
