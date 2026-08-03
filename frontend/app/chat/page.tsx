@@ -1,39 +1,30 @@
 import ChatHeader from "../../components/ChatHeader";
-import ChatHistory from "../../components/ChatHistory";
 import ChatBox from "../../components/ChatBox";
 import ChatInput from "../../components/ChatInput";
+
 
 export default function ChatPage() {
   return (
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
         height: "100vh",
       }}
     >
-      <ChatHistory />
+      <ChatHeader />
 
       <div
         style={{
           flex: 1,
-          display: "flex",
-          flexDirection: "column",
+          overflowY: "auto",
+          padding: "20px",
         }}
       >
-        <ChatHeader />
-
-        <div
-          style={{
-            flex: 1,
-            overflowY: "auto",
-            padding: "20px",
-          }}
-        >
-          <ChatBox />
-        </div>
-
-        <ChatInput />
+        <ChatBox />
       </div>
+
+      <ChatInput />
     </div>
   );
 }
