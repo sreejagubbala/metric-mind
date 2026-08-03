@@ -1,3 +1,4 @@
+// @ts-expect-error CSS import type declarations missing
 import "./globals.css";
 
 export const metadata = {

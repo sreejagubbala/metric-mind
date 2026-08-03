@@ -1,3 +1,16 @@
+<p align="center">
+  <img src="assets/images/Banner.png" alt="MetricMind Banner" width="100%">
+</p>
+
+<h1 align="center">🚀 MetricMind</h1>
+
+<p align="center">
+AI-Powered Semantic Business Intelligence Engine
+</p>
+
+<p align="center">
+Transforming Business Data into Actionable Insights using AI, Semantic Search and Business Intelligence.
+</p>
 <div align="center">
 
 # 🚀 MetricMind
@@ -9,6 +22,21 @@ Transform Business Data into Actionable Insights using Artificial Intelligence, 
 </div>
 
 ---
+<p align="center">
+
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi)
+
+![Next.js](https://img.shields.io/badge/Next.js-Frontend-black?logo=next.js)
+
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql)
+
+![dbt](https://img.shields.io/badge/dbt-Data%20Transformation-orange)
+
+![License](https://img.shields.io/badge/License-Educational-green)
+
+</p>
 
 # 📖 Overview
 

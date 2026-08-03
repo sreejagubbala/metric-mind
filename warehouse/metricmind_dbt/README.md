@@ -1,15 +1,17 @@
-Welcome to your new dbt project!
+<div align="center">
 
-### Using the starter project
+# 🚀 MetricMind
 
-Try running the following commands:
-- dbt run
-- dbt test
+### AI-Powered Semantic Business Intelligence Engine
 
+Transform Business Data into Actionable Insights using Artificial Intelligence, Semantic Search, and Business Intelligence.
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+</div>
+
+---
+
+# 📖 Overview
+
+MetricMind is an AI-powered Semantic Business Intelligence (BI) Engine that enables users to analyze business data using natural language.
+
+Instead of writing SQL queries, users can simply ask questions in plain English and receive meaningful business insights through AI-powered analytics and interactive dashboards.
