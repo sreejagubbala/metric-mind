@@ -2,8 +2,6 @@
   <img src="assets/images/Banner.png" alt="MetricMind Banner" width="100%">
 </p>
 
-<h1 align="center">🚀 MetricMind</h1>
-
 
 
 <div align="center">
