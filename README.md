@@ -8,10 +8,6 @@
 AI-Powered Semantic Business Intelligence Engine
 </p>
 
-<p align="center">
-Transforming Business Data into Actionable Insights using AI, Semantic Search and Business Intelligence.
-</p>
-<div align="center">
 
 # 🚀 MetricMind
 
