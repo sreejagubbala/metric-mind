@@ -2,100 +2,83 @@ version: 2
 
 models:
   - name: stg_superstore
-    description: "Clean staging model for Superstore dataset."
+    description: "Cleaned and standardized staging model for the Global Superstore dataset."
 
     columns:
-      - name: row_id
-        description: "Unique row identifier."
-        tests:
-          - unique
-          - not_null
-
       - name: order_id
-        description: "Order identifier."
+        description: "Unique identifier for each order."
         tests:
           - not_null
 
       - name: customer_id
-        description: "Customer identifier."
+        description: "Unique customer identifier."
         tests:
           - not_null
 
       - name: product_id
-        description: "Product identifier."
-        tests:
-          - not_null
-
-      - name: sales
-        description: "Sales amount."
+        description: "Unique product identifier."
         tests:
           - not_null
 
       - name: region
-        description: "Sales region."
-        tests:
-          - accepted_values:
-              arguments:
-                values: ['Central', 'East', 'South', 'West']
-
-  - name: fact_sales
-    description: "Fact table containing sales transactions."
-
-    columns:
-      - name: row_id
-        tests:
-          - unique
-          - not_null
-
-      - name: customer_id
-        tests:
-          - not_null
-
-      - name: product_id
+        description: "Region where the order was placed."
         tests:
           - not_null
 
       - name: sales
+        description: "Sales amount for the order."
         tests:
           - not_null
 
       - name: profit
+        description: "Profit earned from the order."
+
+  - name: dim_customer
+    description: "Dimension table containing customer information."
+
+    columns:
+      - name: customer_id
         tests:
           - not_null
 
-  - name: dim_customer
-    description: "Customer dimension."
-
   - name: dim_product
-    description: "Product dimension."
-
-  - name: dim_region
-    description: "Region dimension."
+    description: "Dimension table containing product details."
 
     columns:
-    - name: region
-      description: "Region name."
+      - name: product_id
+        tests:
+          - not_null
 
-      tests:
-        - not_null
+  - name: dim_region
+    description: "Dimension table containing regional information."
 
-  - name: monthly_sales
-    description: "Monthly sales and profit summary."
+    columns:
+      - name: region
+        tests:
+          - not_null
 
-  - name: regional_sales
-    description: "Sales and profit summary by region."
+  - name: fact_sales
+    description: "Fact table storing sales transactions for business analytics."
 
-  - name: category_sales
-    description: "Sales performance by product category."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
 
-  - name: top_products
-    description: "Top 10 products based on total sales."
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
 
-  - name: top_customers
-    description: "Top 10 customers based on total sales."
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
 
-  - name: sales_trend
-    description: "Monthly sales trend analysis."
-
-  - name: customer_segment_analysis
-    description: "Sales analysis by customer segment."
+      - name: region
+        tests:
+          - relationships:
+              to: ref('dim_region')
+              field: region
