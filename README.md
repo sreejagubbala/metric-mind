@@ -4,9 +4,9 @@
 
 <h1 align="center">🚀 MetricMind</h1>
 
-<div>
 
-<p align="center">
+
+<div align="center">
 
 
 # 🚀 MetricMind
@@ -14,7 +14,7 @@
 ### AI-Powered Semantic Business Intelligence Engine
 
 Transform Business Data into Actionable Insights using Artificial Intelligence, Semantic Search, and Business Intelligence.
-</p
+
 
 </div>
 
