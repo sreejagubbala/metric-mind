@@ -1,3 +1,4 @@
+-- Fact table containing all sales transactions for business analytics.
 SELECT
     row_id,
     order_id,
