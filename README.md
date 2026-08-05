@@ -107,6 +107,41 @@ Instead of writing SQL queries, users can simply ask questions in plain English 
 metric-mind/
 │
 ├── backend/                  # FastAPI backend services
+│    ├── models/
+│    │     ├── __init__.py
+│    │     ├── query.py    
+│    │     └── user.py
+│    ├── routes/
+│    │     ├── __init__.py
+│    │     ├── analytics.py
+│    │     ├── auth.py
+│    │     ├── health.py
+│    │     ├── integration.py
+│    │     ├── query.py
+│    │     ├── summary.py
+│    │     ├── users.py
+│    │     └── ai.py
+│    ├── schemas/
+│    │     └── users.py
+│    ├── services/
+│    │     ├── __init__.py
+│    │     ├── ai_service.py
+│    │     ├── data_service.py
+│    │     ├── integration_service.py
+│    │     └── logging_service.py
+│    ├── tests/
+│    │     └── test_api.py
+│    ├── utils/
+│    │     ├── __init__.py
+│    │     ├── auth.py   
+│    │     └── error_handler.py
+│    ├── __init__.py
+│    ├── .gitignore
+│    ├── main.py
+│    ├── requirements.txt
+│    ├── config.py
+│    ├── .env
+│    └── database.py
 ├── frontend/                 # Next.js frontend application
 ├── semantic-layer/           # Semantic query processing
 ├── warehouse/
@@ -350,7 +385,7 @@ The overall workflow of MetricMind is as follows:
 | Venkat | Backend Developer |
 | Ishita | Frontend Developer |
 | Vijay | Semantic Layer Developer |
-| Mehatab | AI Integration & Testing |
+| Mehatab | AI Agent Developer |
 ---
 
 # 🚀 Future Enhancements
