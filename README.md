@@ -242,11 +242,10 @@ npm install
 
 # ▶️ Running the Project
 
-## Start the Backend
+## Start the Backend (from the project root directory) 
 
 ```bash
-cd backend
-uvicorn main:app --reload
+uvicorn backend.main:app --reload
 ```
 
 Backend URL
@@ -375,6 +374,13 @@ The overall workflow of MetricMind is as follows:
 6. The FastAPI backend serves processed data.
 7. The Semantic Layer interprets natural language queries.
 8. The Next.js frontend displays business insights to users.
+---
+
+# Running Tests
+ 
+ Backend
+ 
+ pytest
 ---
 
 # 👥 Team Members
