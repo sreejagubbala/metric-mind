@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual Environment
+venv/
+.env
+
+# Logs
+logs/
+*.log
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Python cache
+.pytest_cache/
+.coverage
+
+# Node
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.production.local
+
+# Database
+*.sqlite3

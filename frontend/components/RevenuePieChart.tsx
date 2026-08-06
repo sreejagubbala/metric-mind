@@ -1,0 +1,26 @@
+export default function RevenuePieChart() {
+  return (
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        minHeight: "300px",
+      }}
+    >
+      <h2>Revenue Distribution</h2>
+
+      <div
+        style={{
+          height: "220px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#666",
+        }}
+      >
+        🥧 Revenue Pie Chart
+      </div>
+    </div>
+  );
+}

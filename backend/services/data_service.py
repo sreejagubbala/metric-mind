@@ -62,6 +62,31 @@ def get_order_data():
     ]
     return df[columns]
 
+def get_monthly_revenue():
+    df = pd.read_csv(DATASET_PATH)
+
+    # Convert Order Date to datetime
+    df["Order Date"] = pd.to_datetime(df["Order Date"])
+
+    # Create Month column
+    df["Month"] = df["Order Date"].dt.strftime("%b")
+
+    # Group by month
+    monthly = (
+        df.groupby("Month")["Sales"]
+        .sum()
+        .reindex(
+            ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        )
+        .fillna(0)
+    )
+
+    return {
+        "months": monthly.index.tolist(),
+        "revenue": monthly.values.tolist()
+    }
+
 def get_region_summary():
     df = load_data()
     if "Region" not in df.columns:

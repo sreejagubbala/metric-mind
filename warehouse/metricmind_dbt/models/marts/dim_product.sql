@@ -1,3 +1,4 @@
+-- Product dimension table.
 SELECT DISTINCT
     product_id,
     product_name,

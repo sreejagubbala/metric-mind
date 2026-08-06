@@ -1,3 +1,4 @@
+-- Staging model for cleaning and standardizing the Global Superstore dataset.
 SELECT
     row_id,
     order_id,
