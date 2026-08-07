@@ -1,3 +1,4 @@
+import LogoutButton from "./LogoutButton";
 export default function TopBar() {
   return (
     <header
@@ -21,7 +22,7 @@ export default function TopBar() {
             marginLeft: "30px",
           }}
         >
-          👤 Admin
+          <LogoutButton />
         </span>
       </div>
     </header>
