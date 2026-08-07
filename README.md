@@ -3,7 +3,6 @@
 </p>
 
 
-
 <div align="center">
 
 
@@ -305,6 +304,16 @@ dbt docs serve
 # 🏗️ Data Warehouse
 
 The data warehouse was developed using **PostgreSQL** and **dbt**. It transforms raw transactional data into analytics-ready models following a layered architecture.
+
+## Data Warehouse Features
+
+- dbt Project
+- PostgreSQL Integration
+- Staging Models
+- Fact & Dimension Models
+- Business Metrics
+- Data Validation
+- Auto-generated Documentation
 
 ## Staging Layer
 
