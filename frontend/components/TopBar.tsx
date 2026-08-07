@@ -15,14 +15,23 @@ export default function TopBar() {
     >
       <h2>MetricMind Dashboard</h2>
 
-      <div>
-        🔔 Notifications
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+        }}
+        >
+ 
+
+  
 
         <span
           style={{
             marginLeft: "30px",
           }}
         >
+           <NotificationBell />
           <ProfileMenu />
           <LogoutButton />
         </span>
