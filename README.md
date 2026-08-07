@@ -5,11 +5,13 @@
 
 <div align="center">
 
+
 # 🚀 MetricMind
 
 ### AI-Powered Semantic Business Intelligence Engine
 
 Transform Business Data into Actionable Insights using Artificial Intelligence, Semantic Search, and Business Intelligence.
+
 
 </div>
 
@@ -104,6 +106,41 @@ Instead of writing SQL queries, users can simply ask questions in plain English 
 metric-mind/
 │
 ├── backend/                  # FastAPI backend services
+│    ├── models/
+│    │     ├── __init__.py
+│    │     ├── query.py    
+│    │     └── user.py
+│    ├── routes/
+│    │     ├── __init__.py
+│    │     ├── analytics.py
+│    │     ├── auth.py
+│    │     ├── health.py
+│    │     ├── integration.py
+│    │     ├── query.py
+│    │     ├── summary.py
+│    │     ├── users.py
+│    │     └── ai.py
+│    ├── schemas/
+│    │     └── users.py
+│    ├── services/
+│    │     ├── __init__.py
+│    │     ├── ai_service.py
+│    │     ├── data_service.py
+│    │     ├── integration_service.py
+│    │     └── logging_service.py
+│    ├── tests/
+│    │     └── test_api.py
+│    ├── utils/
+│    │     ├── __init__.py
+│    │     ├── auth.py   
+│    │     └── error_handler.py
+│    ├── __init__.py
+│    ├── .gitignore
+│    ├── main.py
+│    ├── requirements.txt
+│    ├── config.py
+│    ├── .env
+│    └── database.py
 ├── frontend/                 # Next.js frontend application
 ├── semantic-layer/           # Semantic query processing
 ├── warehouse/
@@ -204,11 +241,10 @@ npm install
 
 # ▶️ Running the Project
 
-## Start the Backend
+## Start the Backend (from the project root directory) 
 
 ```bash
-cd backend
-uvicorn main:app --reload
+uvicorn backend.main:app --reload
 ```
 
 Backend URL
@@ -349,6 +385,13 @@ The overall workflow of MetricMind is as follows:
 8. The Next.js frontend displays business insights to users.
 ---
 
+# Running Tests
+ 
+ Backend
+ 
+ pytest
+---
+
 # 👥 Team Members
 
 | Name | Role |
@@ -357,7 +400,7 @@ The overall workflow of MetricMind is as follows:
 | Venkat | Backend Developer |
 | Ishita | Frontend Developer |
 | Vijay | Semantic Layer Developer |
-| Mehatab | AI Integration & Testing |
+| Mehatab | AI Agent Developer |
 ---
 
 # 🚀 Future Enhancements

@@ -1,7 +1,6 @@
 cubes:
   - name: sales
     sql_table: public.sales
-
     dimensions:
       - name: id
         sql: id

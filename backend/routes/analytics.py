@@ -63,6 +63,11 @@ def orders(
             detail=f"Failed to fetch order data: {str(e)}"
         )
 
+@router.get("/monthly-revenue")
+def monthly_revenue():
+    return data_service.get_monthly_revenue()
+
+
 @router.get("/regions")
 def regions(
     current_user: User = Depends(get_current_user)
