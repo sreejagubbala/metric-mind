@@ -26,14 +26,8 @@ export default function LoginForm() {
       }}
     >
 
-      <h1
-        style={{
-          textAlign: "center",
-          marginBottom: "10px",
-        }}
-      >
-        MetricMind
-      </h1>
+      import Logo from "./Logo";
+      <Logo />
 
       <p
         style={{
