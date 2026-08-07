@@ -1,4 +1,5 @@
 import LogoutButton from "./LogoutButton";
+import ProfileMenu from "./ProfileMenu";
 export default function TopBar() {
   return (
     <header
@@ -22,6 +23,7 @@ export default function TopBar() {
             marginLeft: "30px",
           }}
         >
+          <ProfileMenu />
           <LogoutButton />
         </span>
       </div>
