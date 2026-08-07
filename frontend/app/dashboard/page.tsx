@@ -36,7 +36,7 @@ export default function Dashboard() {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3,1fr)",
-          gap: "20px"
+          gap: "20px",
           marginTop: "30px",
       }}
     >
