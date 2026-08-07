@@ -1,20 +1,18 @@
-import Sidebar from "../../components/Sidebar";
+import DashboardLayout from "../../components/DashboardLayout";
+import UserProfile from "../../components/UserProfile";
+import ThemeSettings from "../../components/ThemeSettings";
+import NotificationSettings from "../../components/NotificationSettings";
 
-export default function Settings() {
+export default function SettingsPage() {
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
+    <DashboardLayout>
+      <h1>Settings</h1>
 
-      <main
-        style={{
-          padding: "40px",
-          flex: 1,
-        }}
-      >
-        <h1>Settings</h1>
+      <UserProfile />
 
-        <p>User preferences will be managed here.</p>
-      </main>
-    </div>
+      <ThemeSettings />
+
+      <NotificationSettings />
+    </DashboardLayout>
   );
 }
