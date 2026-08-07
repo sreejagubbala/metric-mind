@@ -10,7 +10,17 @@ export default function LoginForm() {
 
   function handleLogin() {
 
-    alert("Backend login will be connected later.");
+    import { login } from "../services/auth";
+    async function handleLogin() {
+
+    const result = await login(
+        email,
+        password
+    );
+
+    console.log(result);
+
+}
 
   }
 
