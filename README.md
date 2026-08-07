@@ -2,15 +2,7 @@
   <img src="assets/images/Banner.png" alt="MetricMind Banner" width="100%">
 </p>
 
-<h1 align="center">🚀 MetricMind</h1>
 
-<p align="center">
-AI-Powered Semantic Business Intelligence Engine
-</p>
-
-<p align="center">
-Transforming Business Data into Actionable Insights using AI, Semantic Search and Business Intelligence.
-</p>
 <div align="center">
 
 # 🚀 MetricMind
@@ -276,6 +268,16 @@ dbt docs serve
 # 🏗️ Data Warehouse
 
 The data warehouse was developed using **PostgreSQL** and **dbt**. It transforms raw transactional data into analytics-ready models following a layered architecture.
+
+## Data Warehouse Features
+
+- dbt Project
+- PostgreSQL Integration
+- Staging Models
+- Fact & Dimension Models
+- Business Metrics
+- Data Validation
+- Auto-generated Documentation
 
 ## Staging Layer
 
