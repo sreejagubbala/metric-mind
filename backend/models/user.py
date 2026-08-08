@@ -1,4 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from datetime import datetime
+
+from sqlalchemy import Boolean, DateTime, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.database import Base
 
@@ -6,39 +9,39 @@ from backend.database import Base
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(
+    id: Mapped[int] = mapped_column(
         Integer,
         primary_key=True,
-        index=True,
+        index=True
     )
 
-    username = Column(
+    username: Mapped[str] = mapped_column(
         String(100),
         unique=True,
-        nullable=False,
         index=True,
+        nullable=False
     )
 
-    email = Column(
+    email: Mapped[str] = mapped_column(
         String(255),
         unique=True,
-        nullable=False,
         index=True,
+        nullable=False
     )
 
-    hashed_password = Column(
+    hashed_password: Mapped[str] = mapped_column(
         String(255),
-        nullable=False,
+        nullable=False
     )
 
-    role = Column(
-        String(50),
-        default="user",
-        nullable=False,
-    )
-
-    is_active = Column(
+    is_active: Mapped[bool] = mapped_column(
         Boolean,
         default=True,
-        nullable=False,
+        nullable=False
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
     )

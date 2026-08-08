@@ -19,7 +19,10 @@ SECRET_KEY = os.getenv(
     "CHANGE_THIS_SECRET_KEY_IN_PRODUCTION"
 )
 
-ALGORITHM = "HS256"
+ALGORITHM = os.getenv(
+    "ALGORITHM",
+    "HS256"
+)
 
 ACCESS_TOKEN_EXPIRE_MINUTES = int(
     os.getenv(
