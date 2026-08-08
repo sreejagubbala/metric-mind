@@ -1,30 +1,31 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
-from backend.config import DATABASE_URL
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-connect_args = {}
 
-if DATABASE_URL.startswith("sqlite"):
-    connect_args = {
-        "check_same_thread": False
-    }
+DATABASE_URL = "sqlite:///./metricmind.db"
+
 
 engine = create_engine(
     DATABASE_URL,
-    connect_args=connect_args
+    connect_args={
+        "check_same_thread": False
+    },
 )
+
 
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
-    bind=engine
+    bind=engine,
 )
+
 
 Base = declarative_base()
 
+
 def get_db():
     db = SessionLocal()
+
     try:
         yield db
     finally:

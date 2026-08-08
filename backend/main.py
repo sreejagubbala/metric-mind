@@ -3,11 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.database import Base
 from backend.database import engine
+
 from backend.models import user
+
 from backend.config import (
     PROJECT_NAME,
-    VERSION
+    VERSION,
 )
+
 from backend.routes import (
     health,
     analytics,
@@ -15,78 +18,98 @@ from backend.routes import (
     users,
     integration,
     query,
-    
-)
-from backend.routes import summary
-
-Base.metadata.create_all(
-    bind=engine
+    summary,
 )
 
+
+# Create database tables
+Base.metadata.create_all(bind=engine)
+
+
+# Create FastAPI application
 app = FastAPI(
     title=PROJECT_NAME,
     version=VERSION,
     description=(
         "MetricMind "
         "Agentic Semantic BI Engine"
-    )
+    ),
 )
 
+
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
     ],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
+
+# Health routes
 app.include_router(
     health.router,
-    tags=["Health"]
+    tags=["Health"],
 )
 
+
+# Analytics routes
 app.include_router(
     analytics.router,
     prefix="/analytics",
-    tags=["Analytics"]
+    tags=["Analytics"],
 )
 
+
+# Authentication routes
 app.include_router(
     auth.router,
     prefix="/auth",
-    tags=["Authentication"]
+    tags=["Authentication"],
 )
 
+
+# Summary routes
 app.include_router(
     summary.router,
     prefix="/summary",
-    tags=["summary"]
+    tags=["Summary"],
 )
 
+
+# Users routes
 app.include_router(
     users.router,
     prefix="/users",
-    tags=["Users"]
+    tags=["Users"],
 )
 
+
+# Integration routes
 app.include_router(
     integration.router,
     prefix="/integration",
-    tags=["Integration"]
+    tags=["Integration"],
 )
 
+
+# Query routes
 app.include_router(
     query.router,
     prefix="/query",
-    tags=["Query"]
+    tags=["Query"],
 )
 
+
+# Root endpoint
 @app.get("/")
 def home():
     return {
-        "project":"MetricMind",
+        "project": "MetricMind",
         "message": "Backend Running Successfully",
-        "version": VERSION
+        "version": VERSION,
     }
