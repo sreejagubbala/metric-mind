@@ -1,115 +1,46 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter
 
-from backend.models.user import User
-from backend.services import data_service
-from backend.utils.auth import get_current_user
+from backend.services.data_service import (
+    get_category_data,
+    get_monthly_revenue,
+    get_order_data,
+    get_profit_data,
+    get_region_data,
+    get_sales_data
+)
 
-router = APIRouter()
+
+router = APIRouter(
+    prefix="/analytics",
+    tags=["Analytics"]
+)
+
 
 @router.get("/sales")
-def sales(
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        df = data_service.get_sales_data()
-        return {
-            "status": "success",
-            "count": len(df),
-            "data": df.head(100).to_dict(
-                orient="records"
-            )
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to fetch sales data: {str(e)}"
-        )
+def sales():
+    return get_sales_data()
+
 
 @router.get("/profit")
-def profit(
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        df = data_service.get_profit_data()
-        return {
-            "status": "success",
-            "count": len(df),
-            "data": df.head(100).to_dict(
-                orient="records"
-            )
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to fetch profit data: {str(e)}"
-        )
+def profit():
+    return get_profit_data()
+
 
 @router.get("/orders")
-def orders(
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        df = data_service.get_order_data()
-        return {
-            "status": "success",
-            "count": len(df),
-            "data": df.head(100).to_dict(
-                orient="records"
-            )
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to fetch order data: {str(e)}"
-        )
-
-@router.get("/monthly-revenue")
-def monthly_revenue():
-    return data_service.get_monthly_revenue()
+def orders():
+    return get_order_data()
 
 
 @router.get("/regions")
-def regions(
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        return {
-            "status": "success",
-            "data": data_service.get_region_summary()
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to fetch region data: {str(e)}"
-        )
+def regions():
+    return get_region_data()
+
 
 @router.get("/categories")
-def categories(
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        return {
-            "status": "success",
-            "data": data_service.get_category_summary()
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to fetch category data: {str(e)}"
-        )
+def categories():
+    return get_category_data()
 
-@router.get("/summary")
-def summary(
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        return {
-            "status": "success",
-            "sales": data_service.get_sales_summary(),
-            "profit": data_service.get_profit_summary()
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to fetch analytics summary: {str(e)}"
-        )
+
+@router.get("/monthly-revenue")
+def monthly_revenue():
+    return get_monthly_revenue()

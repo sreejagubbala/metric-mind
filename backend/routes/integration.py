@@ -1,22 +1,22 @@
-from fastapi import APIRouter
-from fastapi import Depends
+from fastapi import APIRouter, Depends
 
 from backend.config import (
     AI_AGENT_URL,
     SEMANTIC_LAYER_URL
 )
 from backend.models.user import User
-from backend.utils.auth import (
-    get_current_user
+from backend.utils.auth import get_current_user
+
+
+router = APIRouter(
+    prefix="/integration",
+    tags=["Integration"]
 )
 
-router = APIRouter()
 
 @router.get("/status")
 def integration_status(
-    current_user: User = Depends(
-        get_current_user
-    )
+    current_user: User = Depends(get_current_user)
 ):
     return {
         "project": "MetricMind",

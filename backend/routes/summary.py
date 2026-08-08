@@ -1,36 +1,26 @@
 from fastapi import APIRouter
-from fastapi import Depends
-from fastapi import HTTPException
 
-from backend.models.user import User
-from backend.services import data_service
-from backend.utils.auth import (
-    get_current_user
+from backend.services.data_service import (
+    get_order_data,
+    get_profit_data,
+    get_sales_data
 )
 
-router = APIRouter()
+
+router = APIRouter(
+    prefix="/summary",
+    tags=["Summary"]
+)
+
 
 @router.get("/")
-def summary(
-    current_user: User = Depends(
-        get_current_user
-    )
-):
-    try:
-        return {
-            "status": "success",
-            "sales":
-                data_service
-                .get_sales_summary(),
-            "profit":
-                data_service
-                .get_profit_summary()
-        }
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=(
-                f"Failed to fetch "
-                f"summary: {str(e)}"
-            )
-        )
+def get_summary():
+    sales = get_sales_data()
+    profit = get_profit_data()
+    orders = get_order_data()
+
+    return {
+        "total_sales": sales["total_sales"],
+        "total_profit": profit["total_profit"],
+        "total_orders": orders["total_orders"]
+    }

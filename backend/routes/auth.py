@@ -1,105 +1,93 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from pydantic import BaseModel, EmailStr
 
 from backend.database import get_db
 from backend.models.user import User
+from backend.schemas.user import UserCreate, UserResponse
 from backend.utils.auth import (
-    verify_password,
-    hash_password,
     create_access_token,
+    hash_password,
+    verify_password,
+)
+
+router = APIRouter(
+    prefix="/auth",
+    tags=["Authentication"],
 )
 
 
-router = APIRouter()
-
-
-# =========================================================
-# REGISTER
-# =========================================================
-
-class RegisterRequest(BaseModel):
-    username: str
-    email: EmailStr
-    password: str
-
-
-@router.post("/register")
+@router.post(
+    "/register",
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED,
+)
 def register(
-    data: RegisterRequest,
+    user_data: UserCreate,
     db: Session = Depends(get_db),
 ):
-    # Check email
+    existing_user = (
+        db.query(User)
+        .filter(User.username == user_data.username)
+        .first()
+    )
+
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already exists",
+        )
+
     existing_email = (
         db.query(User)
-        .filter(User.email == data.email)
+        .filter(User.email == user_data.email)
         .first()
     )
 
     if existing_email:
         raise HTTPException(
-            status_code=400,
-            detail="Email already registered",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already exists",
         )
 
-    # Check username
-    existing_username = (
-        db.query(User)
-        .filter(User.username == data.username)
-        .first()
-    )
-
-    if existing_username:
+    if len(user_data.password.encode("utf-8")) > 72:
         raise HTTPException(
-            status_code=400,
-            detail="Username already exists",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password cannot be longer than 72 bytes",
         )
 
-    # Create user
-    new_user = User(
-        username=data.username,
-        email=data.email,
-        hashed_password=hash_password(data.password),
-        role="user",
-        is_active=True,
+    user = User(
+        username=user_data.username,
+        email=user_data.email,
+        hashed_password=hash_password(user_data.password),
+        role=user_data.role,
     )
 
-    db.add(new_user)
+    db.add(user)
     db.commit()
-    db.refresh(new_user)
+    db.refresh(user)
 
-    return {
-        "message": "Registration successful",
-        "user": {
-            "id": new_user.id,
-            "username": new_user.username,
-            "email": new_user.email,
-            "role": new_user.role,
-        },
-    }
+    return user
 
-
-# =========================================================
-# LOGIN
-# =========================================================
 
 @router.post("/login")
 def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
 ):
-    # Email is sent through OAuth2 username field
     user = (
         db.query(User)
-        .filter(User.email == form_data.username)
+        .filter(User.username == form_data.username)
         .first()
     )
 
-    if user is None:
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid Email ID or Password",
+            detail="Invalid username or password",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
         )
 
     if not verify_password(
@@ -108,7 +96,10 @@ def login(
     ):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid Email ID or Password",
+            detail="Invalid username or password",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
         )
 
     if not user.is_active:
@@ -118,9 +109,10 @@ def login(
         )
 
     access_token = create_access_token(
-        username=user.username,
-        user_id=user.id,
-        role=user.role,
+        data={
+            "sub": user.username,
+            "role": user.role,
+        }
     )
 
     return {
@@ -132,74 +124,4 @@ def login(
             "email": user.email,
             "role": user.role,
         },
-    }
-
-
-# =========================================================
-# FORGOT PASSWORD
-# =========================================================
-
-class ForgotPasswordRequest(BaseModel):
-    email: EmailStr
-
-
-@router.post("/forgot-password")
-def forgot_password(
-    data: ForgotPasswordRequest,
-    db: Session = Depends(get_db),
-):
-    user = (
-        db.query(User)
-        .filter(User.email == data.email)
-        .first()
-    )
-
-    if user is None:
-        raise HTTPException(
-            status_code=404,
-            detail="No account found with this email",
-        )
-
-    return {
-        "message": (
-            "Account found. "
-            "You can reset your password."
-        )
-    }
-
-
-# =========================================================
-# RESET PASSWORD
-# =========================================================
-
-class ResetPasswordRequest(BaseModel):
-    email: EmailStr
-    new_password: str
-
-
-@router.post("/reset-password")
-def reset_password(
-    data: ResetPasswordRequest,
-    db: Session = Depends(get_db),
-):
-    user = (
-        db.query(User)
-        .filter(User.email == data.email)
-        .first()
-    )
-
-    if user is None:
-        raise HTTPException(
-            status_code=404,
-            detail="No account found with this email",
-        )
-
-    user.hashed_password = hash_password(
-        data.new_password
-    )
-
-    db.commit()
-
-    return {
-        "message": "Password reset successfully"
     }
