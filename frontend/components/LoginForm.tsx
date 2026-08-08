@@ -13,45 +13,59 @@ export default function LoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+  async function handleLogin(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
     setError("");
     setLoading(true);
 
     try {
+      // FastAPI OAuth2 expects form data
       const formData = new URLSearchParams();
 
       formData.append("username", email);
       formData.append("password", password);
 
-      const response = await fetch("http://127.0.0.1:8000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData.toString(),
-      });
+      const response = await fetch(
+        "http://127.0.0.1:8000/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/x-www-form-urlencoded",
+          },
+          body: formData.toString(),
+        }
+      );
 
       const data = await response.json();
 
+      // Wrong credentials
       if (!response.ok) {
-        setError(data.detail || "Invalid email or password");
+        setError(
+          data.detail ||
+            "Invalid Email ID or Password"
+        );
         return;
       }
 
-      // Save access token
+      // Save JWT token
       if (data.access_token) {
-        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem(
+          "access_token",
+          data.access_token
+        );
       }
 
-      // Redirect after successful login
+      // Successful login
       router.push("/dashboard");
     } catch (error) {
-      console.error(error);
+      console.error("Login error:", error);
 
       setError(
-        "Unable to connect to the backend. Please make sure the server is running."
+        "Unable to connect to the backend. Please make sure the backend is running."
       );
     } finally {
       setLoading(false);
@@ -65,9 +79,12 @@ export default function LoginForm() {
         background: "white",
         padding: "40px",
         borderRadius: "15px",
-        boxShadow: "0 5px 15px rgba(0,0,0,0.15)",
+        boxShadow:
+          "0 5px 15px rgba(0,0,0,0.15)",
+        boxSizing: "border-box",
       }}
     >
+      {/* Logo */}
       <Logo />
 
       <p
@@ -81,60 +98,105 @@ export default function LoginForm() {
       </p>
 
       <form onSubmit={handleLogin}>
-        {/* Email */}
-        <label>Email</label>
+        {/* Email ID */}
+        <label
+          style={{
+            display: "block",
+            fontWeight: "600",
+            marginBottom: "8px",
+          }}
+        >
+          Email ID
+        </label>
 
         <input
           type="email"
-          placeholder="Enter Email"
+          placeholder="Enter your Email ID"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
           required
           style={{
             width: "100%",
             padding: "12px",
-            marginTop: "8px",
             marginBottom: "20px",
-            boxSizing: "border-box",
             border: "1px solid #ccc",
-            borderRadius: "6px",
+            borderRadius: "7px",
+            boxSizing: "border-box",
+            fontSize: "15px",
           }}
         />
 
         {/* Password */}
-        <label>Password</label>
+        <label
+          style={{
+            display: "block",
+            fontWeight: "600",
+            marginBottom: "8px",
+          }}
+        >
+          Password
+        </label>
 
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Enter your Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
           required
           style={{
             width: "100%",
             padding: "12px",
-            marginTop: "8px",
-            marginBottom: "20px",
-            boxSizing: "border-box",
+            marginBottom: "10px",
             border: "1px solid #ccc",
-            borderRadius: "6px",
+            borderRadius: "7px",
+            boxSizing: "border-box",
+            fontSize: "15px",
           }}
         />
 
-        {/* Error message */}
-        {error && (
-          <p
+        {/* Forgot Password */}
+        <div
+          style={{
+            textAlign: "right",
+            marginBottom: "20px",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() =>
+              router.push("/forgot-password")
+            }
             style={{
-              color: "#dc2626",
+              background: "none",
+              border: "none",
+              color: "#2563eb",
+              cursor: "pointer",
+              padding: 0,
+              fontSize: "14px",
+            }}
+          >
+            Forgot Password?
+          </button>
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div
+            style={{
               background: "#fee2e2",
+              color: "#dc2626",
               padding: "10px",
               borderRadius: "6px",
-              fontSize: "14px",
               marginBottom: "15px",
+              fontSize: "14px",
             }}
           >
             {error}
-          </p>
+          </div>
         )}
 
         {/* Sign In */}
@@ -143,29 +205,61 @@ export default function LoginForm() {
           disabled={loading}
           style={{
             width: "100%",
-            background: loading ? "#9ca3af" : "#2563eb",
+            background: loading
+              ? "#9ca3af"
+              : "#2563eb",
             color: "white",
             border: "none",
             padding: "14px",
             borderRadius: "8px",
-            cursor: loading ? "not-allowed" : "pointer",
+            cursor: loading
+              ? "not-allowed"
+              : "pointer",
             fontSize: "16px",
             fontWeight: "600",
           }}
         >
-          {loading ? "Signing In..." : "Sign In"}
+          {loading
+            ? "Signing In..."
+            : "Sign In"}
         </button>
       </form>
 
-      <p
+      {/* New User */}
+      <div
         style={{
-          marginTop: "20px",
           textAlign: "center",
-          color: "#777",
+          marginTop: "25px",
+          paddingTop: "20px",
+          borderTop: "1px solid #eee",
         }}
       >
-        Forgot Password?
-      </p>
+        <span
+          style={{
+            color: "#666",
+            fontSize: "14px",
+          }}
+        >
+          New User?{" "}
+        </span>
+
+        <button
+          type="button"
+          onClick={() =>
+            router.push("/register")
+          }
+          style={{
+            background: "none",
+            border: "none",
+            color: "#2563eb",
+            cursor: "pointer",
+            fontWeight: "600",
+            fontSize: "14px",
+          }}
+        >
+          Create Account
+        </button>
+      </div>
     </div>
   );
 }
